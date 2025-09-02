@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="com.lab2dev.firstapp.controller.Home"
+    controllerName="com.treinamento.firstapp.controller.Home"
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:main="sap.ui.webc.main"

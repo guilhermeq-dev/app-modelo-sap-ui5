@@ -14,7 +14,7 @@ sap.ui.define([
 			// start the app UI component
 			this.iStartMyUIComponent({
 				componentConfig: {
-					name: "com.lab2dev.firstapp",
+					name: "com.treinamento.firstapp",
 					async: true
 				},
 				hash: oOptions.hash,

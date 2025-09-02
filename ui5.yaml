@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: com.lab2dev.firstapp
+  name: com.treinamento.firstapp
 type: application
 server:
   customMiddleware:
@@ -27,5 +27,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: com.lab2dev.firstapp
+        component: com.treinamento.firstapp
         ui5Theme: sap_horizon

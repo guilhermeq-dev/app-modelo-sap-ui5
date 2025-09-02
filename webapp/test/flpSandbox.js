@@ -40,7 +40,7 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "First App",
-									"targetURL": "#comlab2devfirstapp-display"
+									"targetURL": "#comtreinamentofirstapp-display"
 								}
 							}]
 						}]
@@ -51,8 +51,8 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"comlab2devfirstapp-display": {
-								"semanticObject": "comlab2devfirstapp",
+							"comtreinamentofirstapp-display": {
+								"semanticObject": "comtreinamentofirstapp",
 								"action": "display",
 								"description": "A Fiori application.",
 								"title": "First App",
@@ -61,8 +61,8 @@ sap.ui.define([
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=com.lab2dev.firstapp",
-									"url": sap.ui.require.toUrl("com/lab2dev/firstapp")
+									"additionalInformation": "SAPUI5.Component=com.treinamento.firstapp",
+									"url": sap.ui.require.toUrl("com/treinamento/firstapp")
 								}
 							}
 						}

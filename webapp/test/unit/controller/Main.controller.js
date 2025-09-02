@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"comlab2dev/firstapp/controller/Main.controller"
+	"comtreinamento/firstapp/controller/Main.controller"
 ], function (Controller) {
 	"use strict";
 

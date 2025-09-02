@@ -1,10 +1,10 @@
 sap.ui.define([
-    "com/lab2dev/firstapp/controller/BaseController",
+    "com/treinamento/firstapp/controller/BaseController",
     "sap/m/MessageBox",
-    "com/lab2dev/firstapp/model/models",
+    "com/treinamento/firstapp/model/models",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "com/lab2dev/firstapp/model/formatter",
+    "com/treinamento/firstapp/model/formatter",
     "sap/ui/model/json/JSONModel"
 ],
     /**
@@ -13,20 +13,14 @@ sap.ui.define([
     function (Controller, MessageBox, models, Filter, FilterOperator, formatter, JSONModel) {
         "use strict";
 
-        return Controller.extend("com.lab2dev.firstapp.controller.Home", {
+        return Controller.extend("com.treinamento.firstapp.controller.Home", {
             formatter: formatter,
 
             onInit: function () {
-                this.params = {
-                    urlParameters: {
-                        $expand: "Category"
-                    }
-                };
-
                 this.setProductsModel();
             },
             setProductsModel: function () {
-                const products = models.getProducts(this.params);
+                const products = models.getProducts();
                 const table = this.byId("table");
                 table.setBusy(true);
                 products
@@ -56,12 +50,12 @@ sap.ui.define([
                 const oCreateModel = new JSONModel(oData);
                 this.getView().setModel(oCreateModel, "createProduct");
 
-                if (!this.createDialog) {
-                    this.createDialog = sap.ui.xmlfragment(viewId, "com.lab2dev.firstapp.view.fragments.CreateProduct", this);
-                    this.getView().addDependent(this.createDialog);
+                if (!this._createDialog) {
+                    this._createDialog = sap.ui.xmlfragment(viewId, "com.treinamento.firstapp.view.fragments.CreateProduct", this);
+                    this.getView().addDependent(this._createDialog);
                 };
 
-                this.createDialog.open();
+                this._createDialog.open();
             },
             onCreateProduct: function () {
                 const oCreateModel = this.getView().getModel("createProduct");
@@ -70,7 +64,7 @@ sap.ui.define([
                     .then((res) => {
                         this.setProductsModel();
                         MessageBox.success(`Produto '${res.Name}' criado com sucesso!`);
-                        this.createDialog.close();
+                        this._createDialog.close();
                     })
                     .catch((oError) => {
                         MessageBox.error(oError);
@@ -110,12 +104,12 @@ sap.ui.define([
                 const oEditModel = new JSONModel(oData);
                 this.getView().setModel(oEditModel, "editProduct");
 
-                if (!this.editDialog) {
-                    this.editDialog = sap.ui.xmlfragment(this.getView().getId(), "com.lab2dev.firstapp.view.fragments.EditProduct", this);
-                    this.getView().addDependent(this.editDialog);
+                if (!this._editDialog) {
+                    this._editDialog = sap.ui.xmlfragment(this.getView().getId(), "com.treinamento.firstapp.view.fragments.EditProduct", this);
+                    this.getView().addDependent(this._editDialog);
                 };
 
-                this.editDialog.open();
+                this._editDialog.open();
             },
             onEditProduct: function () {
                 const oEditModel = this.getView().getModel("editProduct");
@@ -124,7 +118,7 @@ sap.ui.define([
                     .then(() => {
                         this.setProductsModel();
                         MessageBox.success(`Produto atualizado com sucesso!`);
-                        this.editDialog.close();
+                        this._editDialog.close();
                     })
                     .catch((oError) => {
                         MessageBox.error(oError);

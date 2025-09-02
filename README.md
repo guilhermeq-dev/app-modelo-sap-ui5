@@ -10,7 +10,7 @@
 |**Service URL**<br>https://services.odata.org/V2/(S(44k0muiv12ppx2zo4oiptso1))/OData/OData.svc/
 |**Module Name**<br>firstapp|
 |**Application Title**<br>First App|
-|**Namespace**<br>com.lab2dev|
+|**Namespace**<br>com.treinamento|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.139.0|
 |**Enable Code Assist Libraries**<br>False|

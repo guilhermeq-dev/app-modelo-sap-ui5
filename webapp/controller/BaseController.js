@@ -5,7 +5,7 @@ sap.ui.define(
   function (BaseController) {
     "use strict";
 
-    return BaseController.extend("com.lab2dev.firstapp.controller.BaseController", {
+    return BaseController.extend("com.treinamento.firstapp.controller.BaseController", {
       navTo: function (sRouteName, oParameters) {
 
         const params = oParameters || {};
