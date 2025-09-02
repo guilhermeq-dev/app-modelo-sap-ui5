@@ -1,0 +1,81 @@
+<mvc:View
+    controllerName="com.lab2dev.firstapp.controller.Home"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:main="sap.ui.webc.main"
+    xmlns="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f">
+	<m:Page showHeader="false" enableScrolling="false" navButtonPress="onNavBack" showNavButton="false">
+		<m:content>
+					<Table
+						id="table"
+						rows="{products>/}"
+						selectionMode="None"
+						enableColumnReordering="false"
+						rowMode="Auto"
+						>
+						<extension>
+							<m:OverflowToolbar >
+								<m:Title class="title" text="Produtos"/>
+							</m:OverflowToolbar>
+						</extension>
+						<columns>
+							<Column resizable="false">
+								<m:Label text="ID do produto" />
+								<template>
+									<m:Text text="{products>ID}" wrapping="false" />
+								</template>
+							</Column>
+							<Column resizable="false">
+								<m:Label text="Nome do produto" />
+								<template>
+									<m:Label text="{products>Name}"/>
+								</template>
+							</Column>
+							<Column resizable="false" >
+								<m:Label text="Descrição" />
+								<template>
+									<m:Label text="{path: 'products>Description'}" />
+								</template>
+							</Column>
+							<Column resizable="false" >
+								<m:Label text="Avaliação" />
+								<template>
+									<m:Label text="{path: 'products>Rating'}" />
+								</template>
+							</Column>
+							<Column resizable="false" >
+								<m:Label text="Preço" />
+								<template>
+									<m:Label text="{path: 'products>Price'}" />
+								</template>
+							</Column>
+							<Column width="50px" resizable="false">
+									<template>
+											<m:HBox alignItems="Center" justifyContent="Center">
+													<core:Icon size="1rem" color="#5A7DA0" src="sap-icon://edit" press="handleEditProduct" />
+											</m:HBox>
+									</template>
+							</Column>
+							<Column width="50px" resizable="false">
+									<template>
+											<m:HBox alignItems="Center" justifyContent="Center">
+													<core:Icon size="1rem" color="#5A7DA0" src="sap-icon://delete" press="handleDeleteProduct" />
+											</m:HBox>
+									</template>
+							</Column>
+						</columns>
+					</Table>
+		</m:content>
+		<m:footer>
+			<m:Toolbar>
+				<m:ToolbarSpacer/>
+				<m:Button id="createOrder" type="Emphasized" text="Adicionar produto" icon="sap-icon://add" iconFirst="false" press="handleCreateProduct" />
+			</m:Toolbar>
+		</m:footer>
+	</m:Page>
+</mvc:View>

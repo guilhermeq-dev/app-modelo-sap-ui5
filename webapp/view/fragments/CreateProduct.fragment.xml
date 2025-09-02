@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.ui.layout.form">
+<Dialog title="Novo Produto">
+        <content>
+            <VBox>
+              <f:SimpleForm
+                  editable="true"
+                  layout="ResponsiveGridLayout"
+                  labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+                  emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+                  columnsXL="1" columnsL="1" columnsM="1">
+                <f:content>
+
+                  <Label text="ID"/>
+                  <Input id="createId" value="{createProduct>/ID}" placeholder="Preencha" type="Number"/>
+
+                  <Label text="Name"/>
+                  <Input id="createName" value="{createProduct>/Name}" maxLength="120" placeholder="Preencha"/>
+
+                  <Label text="Description"/>
+                  <TextArea id="createDesc" value="{createProduct>/Description}" rows="4" growing="true" growingMaxLines="8" placeholder="Preencha"/>
+
+                  <Label text="Rating"/>
+                  <RatingIndicator id="createRating" value="{createProduct>/Rating}" maxValue="5" visualMode="Half" tooltip="0–5"/>
+
+                  <Label text="Price"/>
+                  <Input id="createPrice" value="{createProduct>/Price}" type="Number" placeholder="Preencha" />
+                </f:content>
+              </f:SimpleForm>
+            </VBox>
+        </content>
+        <buttons>
+          <Button text="Fechar" type="Transparent" press=".onCloseDialog"/>
+          <Button text="Criar" type="Emphasized" press=".onCreateProduct"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
