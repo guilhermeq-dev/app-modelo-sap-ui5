@@ -1,5 +1,5 @@
 sap.ui.define([
-    "com/treinamento/firstapp/controller/BaseController",
+    "../controller/BaseController",
     "sap/m/MessageBox",
     "com/treinamento/firstapp/model/models",
     "sap/ui/model/Filter",
@@ -10,10 +10,10 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
     */
-    function (Controller, MessageBox, models, Filter, FilterOperator, formatter, JSONModel) {
+    function (BaseController, MessageBox, models, Filter, FilterOperator, formatter, JSONModel) {
         "use strict";
 
-        return Controller.extend("com.treinamento.firstapp.controller.Home", {
+        return BaseController.extend("com.treinamento.firstapp.controller.Home", {
             formatter: formatter,
 
             onInit: function () {
@@ -25,7 +25,7 @@ sap.ui.define([
                 table.setBusy(true);
                 products
                     .then((oProductsModel) => {
-                        this.getView().setModel(oProductsModel, 'products');
+                        this.setModel(oProductsModel, 'products');
 
                     })
                     .catch((oError) => {
@@ -48,7 +48,7 @@ sap.ui.define([
                 };
 
                 const oCreateModel = new JSONModel(oData);
-                this.getView().setModel(oCreateModel, "createProduct");
+                this.setModel(oCreateModel, "createProduct");
 
                 if (!this._createDialog) {
                     this._createDialog = sap.ui.xmlfragment(viewId, "com.treinamento.firstapp.view.fragments.CreateProduct", this);
@@ -58,7 +58,7 @@ sap.ui.define([
                 this._createDialog.open();
             },
             onCreateProduct: function () {
-                const oCreateModel = this.getView().getModel("createProduct");
+                const oCreateModel = this.getModel('createProduct');
                 const oData = oCreateModel.getData();
                 models.createProduct(oData)
                     .then((res) => {
@@ -102,7 +102,7 @@ sap.ui.define([
                 };
 
                 const oEditModel = new JSONModel(oData);
-                this.getView().setModel(oEditModel, "editProduct");
+                this.setModel(oEditModel, "editProduct");
 
                 if (!this._editDialog) {
                     this._editDialog = sap.ui.xmlfragment(this.getView().getId(), "com.treinamento.firstapp.view.fragments.EditProduct", this);
@@ -112,7 +112,7 @@ sap.ui.define([
                 this._editDialog.open();
             },
             onEditProduct: function () {
-                const oEditModel = this.getView().getModel("editProduct");
+                const oEditModel = this.getModel('editProduct');
                 const oData = oEditModel.getData();
                 models.updateProduct(oData.ID, oData)
                     .then(() => {
