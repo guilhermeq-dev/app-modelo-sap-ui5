@@ -1,5 +1,6 @@
 sap.ui.define([
-    "../controller/BaseController",
+    // "sap/ui/core/mvc/Controller",
+    "com/treinamento/firstapp/controller/BaseController",
     "sap/m/MessageBox",
     "com/treinamento/firstapp/model/models",
     "sap/ui/model/Filter",
@@ -48,7 +49,7 @@ sap.ui.define([
                 };
 
                 const oCreateModel = new JSONModel(oData);
-                this.setModel(oCreateModel, "createProduct");
+                this.getView().setModel(oCreateModel, "createProduct");
 
                 if (!this._createDialog) {
                     this._createDialog = sap.ui.xmlfragment(viewId, "com.treinamento.firstapp.view.fragments.CreateProduct", this);
@@ -58,7 +59,7 @@ sap.ui.define([
                 this._createDialog.open();
             },
             onCreateProduct: function () {
-                const oCreateModel = this.getModel('createProduct');
+                const oCreateModel = this.getView().getModel("createProduct");
                 const oData = oCreateModel.getData();
                 models.createProduct(oData)
                     .then((res) => {
@@ -102,7 +103,7 @@ sap.ui.define([
                 };
 
                 const oEditModel = new JSONModel(oData);
-                this.setModel(oEditModel, "editProduct");
+                this.getView().setModel(oEditModel, "editProduct");
 
                 if (!this._editDialog) {
                     this._editDialog = sap.ui.xmlfragment(this.getView().getId(), "com.treinamento.firstapp.view.fragments.EditProduct", this);
@@ -112,7 +113,7 @@ sap.ui.define([
                 this._editDialog.open();
             },
             onEditProduct: function () {
-                const oEditModel = this.getModel('editProduct');
+                const oEditModel = this.getView().getModel("editProduct");
                 const oData = oEditModel.getData();
                 models.updateProduct(oData.ID, oData)
                     .then(() => {

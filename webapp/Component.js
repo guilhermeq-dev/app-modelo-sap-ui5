@@ -5,9 +5,10 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/Device",
-    "com/treinamento/firstapp/model/models"
+    "com/treinamento/firstapp/model/models",
+    "com/treinamento/firstapp/connection/connector"
 ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models, connector) {
         "use strict";
 
         return UIComponent.extend("com.treinamento.firstapp.Component", {
@@ -26,6 +27,12 @@ sap.ui.define([
 
                 // enable routing
                 this.getRouter().initialize();
+
+                // models init
+                models.init(this)
+
+                // connector init
+                connector.init(this);
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
