@@ -13,7 +13,7 @@
 		<m:content>
 					<Table
 						id="table"
-						rows="{products>/}"
+						rows="{/Products}"
 						selectionMode="None"
 						enableColumnReordering="false"
 						rowMode="Auto"
@@ -27,31 +27,31 @@
 							<Column resizable="false">
 								<m:Label text="ID do produto" />
 								<template>
-									<m:Text text="{products>ID}" wrapping="false" />
+									<m:Text text="{ID}" wrapping="false" />
 								</template>
 							</Column>
 							<Column resizable="false">
 								<m:Label text="Nome do produto" />
 								<template>
-									<m:Label text="{products>Name}"/>
+									<m:Label text="{Name}"/>
 								</template>
 							</Column>
 							<Column resizable="false" >
 								<m:Label text="Descrição" />
 								<template>
-									<m:Label text="{path: 'products>Description'}" />
+									<m:Label text="{Description}" />
 								</template>
 							</Column>
 							<Column resizable="false" >
 								<m:Label text="Avaliação" />
 								<template>
-									<m:Label text="{path: 'products>Rating'}" />
+									<m:Label text="{Rating}" />
 								</template>
 							</Column>
 							<Column resizable="false" >
 								<m:Label text="Preço" />
 								<template>
-									<m:Label text="{path: 'products>Price'}" />
+									<m:Label text="{Price}" />
 								</template>
 							</Column>
 							<Column width="50px" resizable="false">

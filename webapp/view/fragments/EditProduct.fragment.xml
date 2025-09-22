@@ -12,15 +12,15 @@
           emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
           columnsXL="1" columnsL="1" columnsM="1">
         <f:content>
-          <Label text="ID"/>
+          <Label text="ID" required="true"/>
           <Input value="{editProduct>/ID}" editable="false"/>
-          <Label text="Name"/>
+          <Label text="Name" required="true"/>
           <Input value="{editProduct>/Name}" maxLength="120" placeholder="Preencha"/>
           <Label text="Description"/>
           <TextArea value="{editProduct>/Description}" rows="4" growing="true" growingMaxLines="8" placeholder="Preencha"/>
           <Label text="Rating"/>
           <RatingIndicator value="{editProduct>/Rating}" maxValue="5" visualMode="Half" tooltip="0–5"/>
-          <Label text="Price"/>
+          <Label text="Price" required="true"/>
           <Input value="{editProduct>/Price}" type="Number" placeholder="Preencha" />
         </f:content>
       </f:SimpleForm>

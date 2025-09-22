@@ -2,23 +2,23 @@ sap.ui.define([
     // "sap/ui/core/mvc/Controller",
     "com/treinamento/firstapp/controller/BaseController",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "com/treinamento/firstapp/model/models",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "com/treinamento/firstapp/model/formatter",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
     */
-    function (BaseController, MessageBox, models, Filter, FilterOperator, formatter, JSONModel) {
+    function (BaseController, MessageBox, MessageToast, models, Filter, FilterOperator, formatter, JSONModel) {
         "use strict";
 
         return BaseController.extend("com.treinamento.firstapp.controller.Home", {
             formatter: formatter,
 
             onInit: function () {
-                this.setProductsModel();
             },
             setProductsModel: function () {
                 const products = models.getProducts();
@@ -61,9 +61,15 @@ sap.ui.define([
             onCreateProduct: function () {
                 const oCreateModel = this.getView().getModel("createProduct");
                 const oData = oCreateModel.getData();
+                
+                if(!oData.ID || !oData.Price || !oData.Name) {
+                    return MessageToast.show('Por favor, preencha os campos obrigatórios!')
+                };
+                
+                const oModel = this.getModel();
                 models.createProduct(oData)
                     .then((res) => {
-                        this.setProductsModel();
+                        oModel.refresh();
                         MessageBox.success(`Produto '${res.Name}' criado com sucesso!`);
                         this._createDialog.close();
                     })
@@ -73,14 +79,15 @@ sap.ui.define([
             },
             handleDeleteProduct: function (oEvent) {
                 const oSelectedItem = oEvent.getSource();
-                const sProduct = oSelectedItem.getBindingContext("products").getProperty('ID');
+                const sProduct = oSelectedItem.getBindingContext().getProperty('ID');
+                const oModel = this.getModel();
 
                 MessageBox.confirm("Tem certeza que deseja excluir este produto?", {
                     title: "Alerta", icon: MessageBox.Icon.WARNING, onClose: (oAction) => {
                         if (oAction === MessageBox.Action.OK) {
                             models.deleteProduct(sProduct)
                                 .then(() => {
-                                    this.setProductsModel();
+                                    oModel.refresh();
                                     MessageBox.success(`Produto removido com sucesso!`);
                                 })
                                 .catch((oError) => {
@@ -92,7 +99,7 @@ sap.ui.define([
             },
             handleEditProduct: function (oEvent) {
                 const oSelectedItem = oEvent.getSource();
-                const sProduct = oSelectedItem.getBindingContext("products").getObject();
+                const sProduct = oSelectedItem.getBindingContext().getObject();
 
                 const oData = {
                     ID: sProduct.ID,
@@ -115,9 +122,11 @@ sap.ui.define([
             onEditProduct: function () {
                 const oEditModel = this.getView().getModel("editProduct");
                 const oData = oEditModel.getData();
+                const oModel = this.getModel();
+
                 models.updateProduct(oData.ID, oData)
                     .then(() => {
-                        this.setProductsModel();
+                        oModel.refresh();
                         MessageBox.success(`Produto atualizado com sucesso!`);
                         this._editDialog.close();
                     })

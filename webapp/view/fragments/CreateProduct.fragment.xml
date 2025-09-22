@@ -5,22 +5,17 @@
 <Dialog title="Novo Produto">
         <content>
             <VBox>
-              <f:SimpleForm
-                  editable="true"
-                  layout="ResponsiveGridLayout"
-                  labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
-                  emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
-                  columnsXL="1" columnsL="1" columnsM="1">
+              <f:SimpleForm>
                 <f:content>
-                  <Label text="ID"/>
+                  <Label text="ID" required="true"/>
                   <Input id="createId" value="{createProduct>/ID}" placeholder="Preencha" type="Number"/>
-                  <Label text="Name"/>
+                  <Label text="Name" required="true"/>
                   <Input id="createName" value="{createProduct>/Name}" maxLength="120" placeholder="Preencha"/>
                   <Label text="Description"/>
                   <TextArea id="createDesc" value="{createProduct>/Description}" rows="4" growing="true" growingMaxLines="8" placeholder="Preencha"/>
                   <Label text="Rating"/>
                   <RatingIndicator id="createRating" value="{createProduct>/Rating}" maxValue="5" visualMode="Half" tooltip="0–5"/>
-                  <Label text="Price"/>
+                  <Label text="Price" required="true"/>
                   <Input id="createPrice" value="{createProduct>/Price}" type="Number" placeholder="Preencha" />
                 </f:content>
               </f:SimpleForm>
