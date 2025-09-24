@@ -25,11 +25,6 @@ modules:
           ServiceInstanceName: comtreinamentofirstapp-html5-service
           ServiceKeyName: comtreinamentofirstapp-repo-host-key
           sap.cloud.service: comtreinamentofirstapp
-        - Authentication: OAuth2UserTokenExchange
-          Name: comtreinamentofirstapp_uaa
-          ServiceInstanceName: comtreinamentofirstapp-xsuaa-service
-          ServiceKeyName: comtreinamentofirstapp-uaa-key
-          sap.cloud.service: comtreinamentofirstapp
         existing_destinations_policy: update
   build-parameters:
     no-source: true

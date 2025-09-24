@@ -8,7 +8,7 @@ sap.ui.define([
 
             init: function (oComponent) {
                 this._oComponent = oComponent
-                const uri = "/V2/(S(44k0muiv12ppx2zo4oiptso1))/OData/OData.svc/";
+                const uri = "V2/(S(44k0muiv12ppx2zo4oiptso1))/OData/OData.svc/";
                 const url = this._oComponent.getManifestObject().resolveUri(uri);
                 this.odata = new ODataModel(url, { useBatch: false });
             },

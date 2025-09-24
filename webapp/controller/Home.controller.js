@@ -61,38 +61,38 @@ sap.ui.define([
             onCreateProduct: function () {
                 const oCreateModel = this.getView().getModel("createProduct");
                 const oData = oCreateModel.getData();
-                
+
                 if(!oData.ID || !oData.Price || !oData.Name) {
                     return MessageToast.show('Por favor, preencha os campos obrigatórios!')
                 };
                 
                 const oModel = this.getModel();
                 models.createProduct(oData)
-                    .then((res) => {
-                        oModel.refresh();
-                        MessageBox.success(`Produto '${res.Name}' criado com sucesso!`);
-                        this._createDialog.close();
-                    })
-                    .catch((oError) => {
-                        MessageBox.error(oError);
-                    });
+                .then((res) => {
+                    oModel.refresh();
+                    MessageBox.success(`Produto '${res.Name}' criado com sucesso!`);
+                    this._createDialog.close();
+                })
+                .catch((oError) => {
+                    MessageBox.error(oError);
+                });
             },
             handleDeleteProduct: function (oEvent) {
                 const oSelectedItem = oEvent.getSource();
                 const sProduct = oSelectedItem.getBindingContext().getProperty('ID');
                 const oModel = this.getModel();
-
+                
                 MessageBox.confirm("Tem certeza que deseja excluir este produto?", {
                     title: "Alerta", icon: MessageBox.Icon.WARNING, onClose: (oAction) => {
                         if (oAction === MessageBox.Action.OK) {
                             models.deleteProduct(sProduct)
-                                .then(() => {
-                                    oModel.refresh();
-                                    MessageBox.success(`Produto removido com sucesso!`);
-                                })
-                                .catch((oError) => {
-                                    MessageBox.error(oError);
-                                });
+                            .then(() => {
+                                oModel.refresh();
+                                MessageBox.success(`Produto removido com sucesso!`);
+                            })
+                            .catch((oError) => {
+                                MessageBox.error(oError);
+                            });
                         }
                     }
                 });
@@ -100,7 +100,7 @@ sap.ui.define([
             handleEditProduct: function (oEvent) {
                 const oSelectedItem = oEvent.getSource();
                 const sProduct = oSelectedItem.getBindingContext().getObject();
-
+                
                 const oData = {
                     ID: sProduct.ID,
                     Name: sProduct.Name,
@@ -108,27 +108,29 @@ sap.ui.define([
                     Rating: sProduct.Rating,
                     Price: sProduct.Price
                 };
-
+                
                 const oEditModel = new JSONModel(oData);
                 this.getView().setModel(oEditModel, "editProduct");
-
+                
                 if (!this._editDialog) {
                     this._editDialog = sap.ui.xmlfragment(this.getView().getId(), "com.treinamento.firstapp.view.fragments.EditProduct", this);
                     this.getView().addDependent(this._editDialog);
                 };
-
+                
                 this._editDialog.open();
             },
             onEditProduct: function () {
                 const oEditModel = this.getView().getModel("editProduct");
                 const oData = oEditModel.getData();
                 const oModel = this.getModel();
-
+                
+                if(Object.values(oData).includes('')) return MessageToast.show("Preencha todos os campos obrigatórios.");
+                
                 models.updateProduct(oData.ID, oData)
-                    .then(() => {
-                        oModel.refresh();
-                        MessageBox.success(`Produto atualizado com sucesso!`);
-                        this._editDialog.close();
+                .then(() => {
+                    oModel.refresh();
+                    MessageBox.success(`Produto atualizado com sucesso!`);
+                    this._editDialog.close();
                     })
                     .catch((oError) => {
                         MessageBox.error(oError);
